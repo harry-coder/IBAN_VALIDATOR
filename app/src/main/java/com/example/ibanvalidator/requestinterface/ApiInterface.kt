@@ -22,6 +22,5 @@ interface ApiInterface {
 
 
 }
-
-
+/**Type for generic response*/
 typealias GenericResponse<S> = NetworkResponse<S, BaseError>

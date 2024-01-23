@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.flowWithLifecycle
 import com.example.ibanvalidator.R
+import com.example.ibanvalidator.constants.Constants
 import com.example.ibanvalidator.intruders.events.UIEvents
 import com.example.ibanvalidator.utils.Textview
 import com.example.ibanvalidator.utils.color
@@ -165,7 +166,8 @@ private fun CurrencyItem(name: String, value: String, modifier: Modifier = Modif
             .size(100.dp)
             .padding(5.dp), verticalArrangement = Arrangement.Center
     ) {
-        Textview(text = "${if(selectedItemTop.isEmpty())value?.take(4)?.toDouble()?.times(3.25) else value.take(4)} $name",modifier=modifier.fillMaxWidth(),textAlign = TextAlign.Center)
+        /**Here what we are doing is basically Api was not returning KWD currency so got all the currency in USD as base and 1 USD=3.25 KWD and multiplying with KWD_FACTOR with each currency rate*/
+        Textview(text = "${if(selectedItemTop.isEmpty())value?.take(4)?.toDouble()?.times(Constants.KWD_FACTOR) else value.take(4)} $name",modifier=modifier.fillMaxWidth(),textAlign = TextAlign.Center)
         Textview(text = "IN", textAlign = TextAlign.Center,modifier=modifier.fillMaxWidth())
         Textview(text ="1 ${ selectedItemTop.takeIf { it.isNotEmpty() }?:run{"KWD"}}",textAlign=TextAlign.Center,modifier=modifier.fillMaxWidth())
 

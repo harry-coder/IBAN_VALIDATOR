@@ -14,10 +14,13 @@ import javax.inject.Inject
 
 @ViewModelScoped
 class Repository @Inject constructor(private val apiInterface: ApiInterface) {
+
+    /**Method for IBAN validation*/
     suspend fun getIbanValidationFromServer(iban: String): Flow<GenericResponse<IbanData>> = flow {
         emit(apiInterface.getIbanData(iban = iban))
     }.flowOn(Dispatchers.IO)
 
+    /**Method for Currencies*/
     suspend fun getCurrenciesFromServer(base: String="USD"): Flow<GenericResponse<Currencies>> = flow {
         emit(apiInterface.getCurrencyData(currency = base))
     }.flowOn(Dispatchers.IO)
